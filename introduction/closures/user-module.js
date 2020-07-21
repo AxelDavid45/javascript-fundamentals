@@ -13,10 +13,18 @@ function User () {
 			throw new Error('Missing parameters');
 		}
 
-		if (user === process.env.ALLOWED_USER && token === process.env.ALLOWED_TOKEN) {
+		if (user === getCredentials().validUser && token === getCredentials().validToken) {
 			console.log('Login successful');
 		}
 	}
+
+	//Secret method, you will never know how I get the credentials
+	function getCredentials() {
+	  return {
+	    validUser: process.env.ALLOWED_USER,
+      validToken: process.env.ALLOWED_TOKEN
+    };
+  }
 
 	//Public API methods
 	return {
